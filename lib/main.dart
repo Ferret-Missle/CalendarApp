@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -52,12 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.settings, size: 30),
             onPressed: () {
-              Fluttertoast.showToast(
-                msg: 'onPressed Setting Icon',
-                gravity: ToastGravity.BOTTOM,
-                backgroundColor: Colors.grey,
-                fontSize: 28,
-              );
+              SnackBar(content: Text('Setting Icon Pushed!'));
             },
           ),
         ],
@@ -188,7 +182,9 @@ class _MyHomePageState extends State<MyHomePage> {
         daysOfWeekHeight: 30,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          SnackBar(content: Text('Setting Icon Pushed!'));
+        },
         child: Container(
           width: 80,
           height: 80,
