@@ -51,7 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.settings, size: 30),
             onPressed: () {
-              SnackBar(content: Text('Setting Icon Pushed!'));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Setting Icon Pushed!')),
+              );
             },
           ),
         ],
@@ -183,7 +185,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          SnackBar(content: Text('Setting Icon Pushed!'));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('FAB Pushed!')),
+          );
         },
         child: Container(
           width: 80,
