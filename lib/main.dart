@@ -29,7 +29,20 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  final Map<DateTime, List> _events = {};
+
+  //テストデータ
+  final Map<DateTime, List> _events = {
+    DateTime.utc(2024, 8, 19): [
+      '粗大ごみ',
+      '通院',
+      '【申し込み締切】FE',
+      '即アサ再テスト',
+      '何かの祝日',
+      '賃貸契約'
+    ],
+    DateTime.utc(2024, 8, 20): ['休日　なんかの日'],
+    DateTime.utc(2024, 8, 21): ['【申し込み締切】FE', '即アサ再テスト'],
+  };
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -113,17 +126,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
         //カレンダーのスタイル調整
         calendarBuilders: CalendarBuilders(
+          //イベント表示
+          markerBuilder: (context, date, events) {
+            if (events.isNotEmpty) {
+              return Column(
+                children: [
+                  SizedBox(height: 24),
+                  _buildEventList(events),
+                ],
+              );
+            }
+          },
+
           //今日の日付スタイル
           todayBuilder: (context, day, focusedDay) {
             return Container(
-              // margin: EdgeInsets.only(top: 10),
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 0.1),
               ),
               child: Container(
-                width: 20,
-                height: 20,
+                margin: EdgeInsets.only(top: 3),
+                width: 16,
+                height: 16,
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   shape: BoxShape.circle,
@@ -139,29 +164,50 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           //選択日の日付スタイル
           selectedBuilder: (context, day, focusedDay) {
+            bool isSelectedToday = isSameDay(DateTime.now(), _selectedDay);
+
             return Container(
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 color: Colors.blue[50],
                 border: Border.all(color: Colors.grey, width: 0.1),
               ),
-              child: Text(
-                day.day.toString(),
-                style: TextStyle(color: Colors.black, fontSize: 12),
+              child: Container(
+                margin: EdgeInsets.only(top: 3),
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: isSelectedToday ? Colors.blue : Colors.blue[50],
+                  shape: BoxShape.circle,
+                ),
+                child: Container(
+                  // margin: EdgeInsets.only(top: 1),
+                  child: Center(
+                    child: Text(
+                      day.day.toString(),
+                      style: TextStyle(
+                        color: isSelectedToday ? Colors.white : Colors.black,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             );
           },
           //他日の日付スタイル
           defaultBuilder: (context, day, focusedDay) {
             return Container(
-              // margin: EdgeInsets.only(top: 10),
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 0.1),
               ),
-              child: Text(
-                day.day.toString(),
-                style: TextStyle(color: Colors.black, fontSize: 12),
+              child: Container(
+                margin: EdgeInsets.only(top: 3),
+                child: Text(
+                  day.day.toString(),
+                  style: TextStyle(color: Colors.black, fontSize: 12),
+                ),
               ),
             );
           },
@@ -200,6 +246,33 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         shape: CircleBorder(),
       ),
+    );
+  }
+
+  Widget _buildEventList(List events) {
+    return Column(
+      children: events.map((event) {
+        return Container(
+          width: double.infinity,
+          height: 15,
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.only(top: 0.5, bottom: 0.5, left: 0.5, right: 1),
+          padding: EdgeInsets.only(left: 3),
+          decoration: BoxDecoration(
+            color: Colors.yellow[600],
+            borderRadius: BorderRadius.circular(3.0),
+          ),
+          //イベントテキスト設定
+          child: Text(
+            event.toString(),
+            style: TextStyle().copyWith(
+              color: Colors.black,
+              fontSize: 9,
+            ),
+            maxLines: 1,
+          ),
+        );
+      }).toList(),
     );
   }
 }
