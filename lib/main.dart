@@ -1,3 +1,4 @@
+import 'package:calendar/eventEdit.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -25,24 +26,39 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+class Event {
+  late String id;
+  late String title;
+  bool isAllDay = false;
+  late DateTime startDay;
+  late TimeOfDay startTime;
+  late DateTime endDay;
+  late TimeOfDay endTime;
+  String notes = '';
+  late Color eventColor;
+  bool hasNotification = false;
+
+  Event({
+    required this.id,
+    required this.title,
+    required this.isAllDay,
+    required this.startDay,
+    required this.startTime,
+    required this.endDay,
+    required this.endTime,
+    required this.notes,
+    required this.eventColor,
+    required this.hasNotification,
+  });
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   CalendarFormat _calendarFormat = CalendarFormat.month;
 
   //テストデータ
-  final Map<DateTime, List> _events = {
-    DateTime.utc(2024, 8, 19): [
-      '粗大ごみ',
-      '通院',
-      '【申し込み締切】FE',
-      '即アサ再テスト',
-      '何かの祝日',
-      '賃貸契約'
-    ],
-    DateTime.utc(2024, 8, 20): ['休日　なんかの日'],
-    DateTime.utc(2024, 8, 21): ['【申し込み締切】FE', '即アサ再テスト'],
-  };
+  final Map<DateTime, List> _events = {};
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -231,8 +247,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('FAB Pushed!')),
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   SnackBar(content: Text('FAB Pushed!')),
+          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EventAddPage(eventId: '1'),
+            ),
           );
         },
         child: Container(
