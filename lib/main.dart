@@ -76,16 +76,16 @@ class _MyHomePageState extends State<MyHomePage> {
           DateFormat.yMMM('ja_JP').format(_focusedDay),
           style: TextStyle(fontSize: 24),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings, size: 30),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Setting Icon Pushed!')),
-              );
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.settings, size: 30),
+        //     onPressed: () {
+        //       ScaffoldMessenger.of(context).showSnackBar(
+        //         SnackBar(content: Text('Setting Icon Pushed!')),
+        //       );
+        //     },
+        //   ),
+        // ],
       ),
       drawer: Drawer(
         child: Center(child: Text('drawer')),
