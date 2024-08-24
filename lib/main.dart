@@ -67,43 +67,56 @@ class _MyHomePageState extends State<MyHomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.menu, size: 30),
+          icon: Icon(Icons.menu, size: 24),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
         title: Text(
           DateFormat.yMMM('ja_JP').format(_focusedDay),
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(fontSize: 22),
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(Icons.settings, size: 30),
-        //     onPressed: () {
-        //       ScaffoldMessenger.of(context).showSnackBar(
-        //         SnackBar(content: Text('Setting Icon Pushed!')),
-        //       );
-        //     },
-        //   ),
-        // ],
+        actions: [
+          IconButton(
+            icon: Icon((Icons.calendar_today), size: 24),
+            onPressed: () {
+              setState(() {
+                _focusedDay = DateTime.now();
+                _selectedDay = DateTime.now();
+              });
+            },
+
+            // icon: Icon(Icons.settings, size: 30),
+          ),
+        ],
       ),
       drawer: Drawer(
-        child: Center(child: Text('drawer')),
+        backgroundColor: Colors.white,
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              leading: IconButton(
+                icon: Icon(Icons.close, size: 24),
+                alignment: Alignment.centerRight,
+                onPressed: () {},
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.settings, size: 24),
+                onPressed: () {},
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.close),
+              title: Text('Tile'),
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
       body: TableCalendar(
         locale: 'ja_JP',
         shouldFillViewport: true,
         headerVisible: false,
-        //ヘッダー部分のカスタマイズ
-        // headerStyle: HeaderStyle(
-        //   titleCentered: true,
-        //   titleTextStyle: TextStyle(
-        //     fontSize: 24,
-        //   ),
-        //   formatButtonVisible: false,
-        //   leftChevronVisible: false,
-        //   rightChevronVisible: false,
-        // ),
         pageAnimationEnabled: true,
         pageJumpingEnabled: true,
         sixWeekMonthsEnforced: true,
@@ -127,19 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
             _focusedDay = focusedDay;
           });
         },
-
         //表示付き変更
         onPageChanged: (focusedDay) {
           setState(() {
             _focusedDay = focusedDay;
           });
         },
-
         //イベント読み込み関数
         eventLoader: (day) {
           return _events[day] ?? [];
         },
-
         //カレンダーのスタイル調整
         calendarBuilders: CalendarBuilders(
           //イベント表示
@@ -153,7 +163,6 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             }
           },
-
           //今日の日付スタイル
           todayBuilder: (context, day, focusedDay) {
             return Container(
