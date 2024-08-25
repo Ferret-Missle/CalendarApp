@@ -94,21 +94,33 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         child: ListView(
           children: <Widget>[
-            ListTile(
-              leading: IconButton(
-                icon: Icon(Icons.close, size: 24),
-                alignment: Alignment.centerRight,
-                onPressed: () {},
-              ),
-              trailing: IconButton(
-                icon: Icon(Icons.settings, size: 24),
-                onPressed: () {},
+            Container(
+              width: double.infinity,
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                leading: IconButton(
+                  icon: Icon(Icons.close, size: 24),
+                  alignment: Alignment.centerRight,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.settings, size: 24),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.close),
-              title: Text('Tile'),
-              onTap: () {},
+            Container(
+              width: double.infinity,
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                leading: Icon(Icons.close),
+                title: Text('Tile'),
+                onTap: () {},
+              ),
             ),
           ],
         ),

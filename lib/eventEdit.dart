@@ -24,6 +24,7 @@ class _EventAddPageState extends State<EventAddPage> {
   }
 
   Color eventColor = Colors.yellow;
+  String colorName = '既定の色';
   Map<String, Color> colorPalette = {
     'トマト': Colors.red,
     'オレンジ': Colors.deepOrangeAccent,
@@ -35,7 +36,6 @@ class _EventAddPageState extends State<EventAddPage> {
     'ブドウ': Colors.purple,
     'グラファイト': Colors.grey,
   };
-
   void _pickColor() async {
     Color pickerColor = eventColor;
     await showDialog(
@@ -55,6 +55,7 @@ class _EventAddPageState extends State<EventAddPage> {
                   onTap: () {
                     setState(() {
                       eventColor = entry.value;
+                      colorName = entry.key;
                     });
                     Navigator.of(context).pop();
                   },
@@ -62,17 +63,6 @@ class _EventAddPageState extends State<EventAddPage> {
               }).toList(),
             ),
           ),
-          actions: [
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                setState(() {
-                  eventColor = pickerColor;
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
         );
       },
     );
@@ -165,7 +155,7 @@ class _EventAddPageState extends State<EventAddPage> {
                   child: Text(
                     '2024年8月22日(木)',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
                     ),
@@ -185,7 +175,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     child: Text(
                       '0:30',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
@@ -204,7 +194,7 @@ class _EventAddPageState extends State<EventAddPage> {
                   child: Text(
                     '2024年8月22日(木)',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
                     ),
@@ -222,7 +212,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     child: Text(
                       '1:30',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
@@ -233,31 +223,33 @@ class _EventAddPageState extends State<EventAddPage> {
             ]),
           ),
           Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Icon(
-                  Icons.circle,
-                  color: Colors.yellow,
-                  size: 28,
-                ),
-              ),
-              Flexible(
-                child: TextButton(
-                  child: Text(
-                    '色を選択',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
+          GestureDetector(
+            onTap: _pickColor,
+            child: Container(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 20, top: 10, bottom: 10),
+                    child: Icon(
+                      Icons.circle,
+                      color: eventColor,
+                      size: 28,
                     ),
-                    textAlign: TextAlign.left,
                   ),
-                  onPressed: _pickColor,
-                ),
+                  Expanded(
+                    child: Text(
+                      // textAlign: TextAlign.left,
+                      colorName,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
           Divider(),
           Row(
