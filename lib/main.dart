@@ -31,10 +31,10 @@ class Event {
   late String title;
   bool isAllDay = false;
   late DateTime startDay;
-  late TimeOfDay startTime;
+  TimeOfDay? startTime;
   late DateTime endDay;
-  late TimeOfDay endTime;
-  String notes = '';
+  TimeOfDay? endTime;
+  String? notes = '';
   late Color eventColor;
   bool hasNotification = false;
 
@@ -43,10 +43,10 @@ class Event {
     required this.title,
     required this.isAllDay,
     required this.startDay,
-    required this.startTime,
+    this.startTime,
     required this.endDay,
-    required this.endTime,
-    required this.notes,
+    this.endTime,
+    this.notes,
     required this.eventColor,
     required this.hasNotification,
   });
@@ -162,6 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               );
             }
+            return null;
           },
           //今日の日付スタイル
           todayBuilder: (context, day, focusedDay) {
