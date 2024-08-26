@@ -27,13 +27,12 @@ class _EventAddPageState extends State<EventAddPage> {
   String colorName = '既定の色';
   Map<String, Color> colorPalette = {
     'トマト': Colors.red,
-    'オレンジ': Colors.deepOrangeAccent,
+    'オレンジ': Colors.orangeAccent,
     'バナナ': Colors.yellow,
     'バジル': Colors.green,
-    'セージ': Colors.lightGreenAccent,
     'ピーコック': Colors.lightBlueAccent,
     'ブルーベリー': Colors.deepPurple,
-    'ブドウ': Colors.purple,
+    'グレープ': Colors.purple,
     'グラファイト': Colors.grey,
   };
   void _pickColor() async {
@@ -87,7 +86,9 @@ class _EventAddPageState extends State<EventAddPage> {
               },
               child: Text(
                 '保存',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
@@ -102,12 +103,25 @@ class _EventAddPageState extends State<EventAddPage> {
       body: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 65, right: 40, bottom: 15),
+            padding: EdgeInsets.only(
+              left: 65,
+              right: 40,
+              bottom: 15,
+            ),
             child: TextField(
-              style: TextStyle(fontSize: 28),
+              style: TextStyle(
+                fontSize: 26,
+                // fontWeight: FontWeight.w500,
+                // color: Colors.black,
+              ),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: 'タイトルを入力',
+                hintStyle: TextStyle(
+                  fontSize: 26,
+                  // fontWeight: FontWeight.w300,
+                  // color: Colors.black54,
+                ),
               ),
             ),
           ),
@@ -120,12 +134,14 @@ class _EventAddPageState extends State<EventAddPage> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Icon(
                     Icons.access_time_rounded,
-                    size: 28,
+                    size: 26,
                   ),
                 ),
                 Text(
                   '終日',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
                 Spacer(),
                 Padding(
@@ -175,7 +191,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     child: Text(
                       '0:30',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
@@ -212,7 +228,7 @@ class _EventAddPageState extends State<EventAddPage> {
                     child: Text(
                       '1:30',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
@@ -225,16 +241,16 @@ class _EventAddPageState extends State<EventAddPage> {
           Divider(),
           GestureDetector(
             onTap: _pickColor,
-            child: Container(
+            child: SizedBox(
+              height: 50,
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 20, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Icon(
                       Icons.circle,
                       color: eventColor,
-                      size: 28,
+                      size: 26,
                     ),
                   ),
                   Expanded(
@@ -242,7 +258,8 @@ class _EventAddPageState extends State<EventAddPage> {
                       // textAlign: TextAlign.left,
                       colorName,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
                     ),
@@ -257,16 +274,25 @@ class _EventAddPageState extends State<EventAddPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Icon(
-                  Icons.text_snippet_outlined,
-                  size: 28,
+                  Icons.notes,
+                  size: 26,
                 ),
               ),
               Expanded(
                 child: TextField(
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'メモを追加',
+                    hintStyle: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),

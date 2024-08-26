@@ -9,12 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localization:
+    sdk: flutter
   cupertino_icons: ^1.0.6
   table_calendar: ^3.1.2
   intl: ^0.19.0
   fluttertoast: ^8.2.8
   flutter_colorpicker: ^1.1.0
   flutter_color: ^2.1.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +25,12 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 flutter:
   uses-material-design: true
+  fonts:
+    - family: NotoSansJP
+      fonts:
+        - asset: fonts/NotoSansJP-Light.ttf
+          weight: 300
+        - asset: fonts/NotoSansJP-Regular.ttf
+          weight: 300
+        - asset: fonts/NotoSansJP-Bold.ttf
+          weight: 300

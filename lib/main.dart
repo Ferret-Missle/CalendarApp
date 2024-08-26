@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Calendar Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        useMaterial3: true,
+        fontFamily: 'NotoSansJP',
       ),
       home: MyHomePage(),
     );
