@@ -8,7 +8,14 @@ void main() {
   initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,13 +24,33 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: true,
         fontFamily: 'NotoSansJP',
+        brightness: Brightness.light,
       ),
-      home: MyHomePage(),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
+        fontFamily: 'NotoSansJP',
+        brightness: Brightness.dark,
+      ),
+      themeMode: _themeMode,
+      home: MyHomePage(
+        onThemeChanged: (ThemeMode themeMode) {
+          setState(() {
+            _themeMode = themeMode;
+          });
+        },
+        currentTheme: _themeMode,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  final Function(ThemeMode) onThemeChanged;
+  final ThemeMode currentTheme;
+
+  MyHomePage({required this.onThemeChanged, required this.currentTheme});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -63,6 +90,63 @@ class _MyHomePageState extends State<MyHomePage> {
   final Map<DateTime, List> _events = {};
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  void _showThemeDialog(BuildContext context) {
+    ThemeMode _selectedTheme = widget.currentTheme;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'テーマの選択',
+            style: TextStyle(fontSize: 16),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              RadioListTile<ThemeMode>(
+                title: Text('ライトモード'),
+                value: ThemeMode.light,
+                groupValue: _selectedTheme,
+                onChanged: (ThemeMode? value) {
+                  setState(() {
+                    _selectedTheme = value!;
+                    widget.onThemeChanged(_selectedTheme);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+              RadioListTile<ThemeMode>(
+                title: Text('ダークモード'),
+                value: ThemeMode.dark,
+                groupValue: _selectedTheme,
+                onChanged: (ThemeMode? value) {
+                  setState(() {
+                    _selectedTheme = value!;
+                    widget.onThemeChanged(_selectedTheme);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+              RadioListTile<ThemeMode>(
+                title: Text('システムのデフォルト'),
+                value: ThemeMode.system,
+                groupValue: _selectedTheme,
+                onChanged: (ThemeMode? value) {
+                  setState(() {
+                    _selectedTheme = value!;
+                    widget.onThemeChanged(_selectedTheme);
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +171,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 _selectedDay = DateTime.now();
               });
             },
-
-            // icon: Icon(Icons.settings, size: 30),
           ),
         ],
       ),
@@ -110,20 +192,45 @@ class _MyHomePageState extends State<MyHomePage> {
                 trailing: IconButton(
                   icon: Icon(Icons.settings, size: 24),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => SettingPage(),
+                    //   ),
+                    // );
                   },
                 ),
               ),
             ),
+            Divider(),
             Container(
               width: double.infinity,
               child: ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                leading: Icon(Icons.close),
-                title: Text('Tile'),
+                contentPadding: EdgeInsets.only(left: 60),
+                title: Text(
+                  'テーマ',
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.left,
+                ),
+                subtitle: Text(
+                  'ライトモード',
+                  style: TextStyle(fontSize: 14),
+                  textAlign: TextAlign.left,
+                ),
+                onTap: () {
+                  _showThemeDialog(context);
+                },
+              ),
+            ),
+            Divider(),
+            Container(
+              width: double.infinity,
+              child: ListTile(
+                title: Text('test'),
                 onTap: () {},
               ),
             ),
+            Divider(),
           ],
         ),
       ),
