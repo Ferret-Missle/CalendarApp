@@ -37,7 +37,10 @@ class _MyAppState extends State<MyApp> {
         textTheme: TextTheme(
           bodySmall: TextStyle(color: Colors.white),
         ),
-        dividerColor: Colors.white,
+        dividerTheme: DividerThemeData(
+          color: Colors.grey,
+          thickness: 0.5,
+        ),
       ),
       themeMode: _themeMode,
       home: MyHomePage(
@@ -189,14 +192,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListTile(
                 contentPadding: EdgeInsets.symmetric(horizontal: 0),
                 leading: IconButton(
-                  icon: Icon(Icons.close, size: 24),
+                  icon: Icon(Icons.close, size: 28),
                   alignment: Alignment.centerRight,
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.settings, size: 24),
+                  icon: Icon(Icons.settings, size: 28),
                   onPressed: () {
                     // Navigator.push(
                     //   context,
@@ -225,7 +228,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 subtitle: Text(
                   'ライトモード',
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 onTap: () {
