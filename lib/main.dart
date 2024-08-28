@@ -215,7 +215,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 contentPadding: EdgeInsets.only(left: 60),
                 title: Text(
                   'テーマ',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 subtitle: Text(
