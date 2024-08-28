@@ -41,6 +41,13 @@ class _MyAppState extends State<MyApp> {
           color: Colors.grey,
           thickness: 0.5,
         ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.grey[800],
+          foregroundColor: Colors.grey[300],
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
       themeMode: _themeMode,
       home: MyHomePage(
@@ -227,7 +234,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   textAlign: TextAlign.left,
                 ),
                 subtitle: Text(
-                  'ライトモード',
+                  Theme.of(context).brightness == Brightness.light
+                      ? 'ライトモード'
+                      : 'ダークモード',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w300,
@@ -291,6 +300,20 @@ class _MyHomePageState extends State<MyHomePage> {
         eventLoader: (day) {
           return _events[day] ?? [];
         },
+        daysOfWeekStyle: DaysOfWeekStyle(
+          weekdayStyle: TextStyle(
+            fontWeight: FontWeight.w200,
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.black
+                : Colors.white,
+          ),
+          weekendStyle: TextStyle(
+            fontWeight: FontWeight.w200,
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.black
+                : Colors.white,
+          ),
+        ),
         //カレンダーのスタイル調整
         calendarBuilders: CalendarBuilders(
           //イベント表示
@@ -314,8 +337,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: Container(
                 margin: EdgeInsets.only(top: 3),
-                width: 16,
-                height: 16,
+                width: 18,
+                height: 18,
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   shape: BoxShape.circle,
@@ -418,10 +441,9 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 80,
           child: Icon(
             Icons.add,
-            size: 40,
+            size: 32,
           ),
         ),
-        backgroundColor: Colors.white,
         shape: CircleBorder(),
       ),
     );
