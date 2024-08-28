@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.light;
+  ThemeMode _themeMode = ThemeMode.system;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,17 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
       ),
       darkTheme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColorDark: Colors.grey,
         useMaterial3: true,
         fontFamily: 'NotoSansJP',
         brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(color: Colors.grey[900]),
+        scaffoldBackgroundColor: Colors.grey[900],
+        drawerTheme: DrawerThemeData(backgroundColor: Colors.grey[800]),
+        textTheme: TextTheme(
+          bodySmall: TextStyle(color: Colors.white),
+        ),
+        dividerColor: Colors.white,
       ),
       themeMode: _themeMode,
       home: MyHomePage(
@@ -175,7 +182,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       drawer: Drawer(
-        backgroundColor: Colors.white,
         child: ListView(
           children: <Widget>[
             Container(
@@ -353,7 +359,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 margin: EdgeInsets.only(top: 3),
                 child: Text(
                   day.day.toString(),
-                  style: TextStyle(color: Colors.black, fontSize: 12),
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             );
