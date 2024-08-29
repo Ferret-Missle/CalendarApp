@@ -148,11 +148,9 @@ class _EventAddPageState extends State<EventAddPage> {
               trailing: Switch(
                 value: isOn,
                 onChanged: (bool? value) {
-                  if (value != null) {
-                    setState(() {
-                      isOn = value;
-                    });
-                  }
+                  setState(() {
+                    isOn = value!;
+                  });
                 },
                 activeColor: Theme.of(context).brightness == Brightness.dark
                     ? Colors.black
@@ -162,51 +160,13 @@ class _EventAddPageState extends State<EventAddPage> {
                         ? Colors.white
                         : Colors.black,
               ),
+              onTap: () {
+                setState(() {
+                  isOn = !isOn;
+                });
+              },
             ),
           ),
-
-          // Padding(
-          //   padding: EdgeInsets.symmetric(vertical: 10),
-          //   child: Row(
-          //     children: [
-          //       Padding(
-          //         padding: const EdgeInsets.only(left: 20, right: 20),
-          //         child: Icon(
-          //           Icons.access_time_rounded,
-          //           size: 26,
-          //         ),
-          //       ),
-          //       Text(
-          //         '終日',
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           fontWeight: FontWeight.w500,
-          //         ),
-          //       ),
-          //       Spacer(),
-          //       Padding(
-          //         padding: EdgeInsets.only(right: 25),
-          //         child: Switch(
-          //           value: isOn,
-          //           onChanged: (bool? value) {
-          //             if (value != null) {
-          //               setState(() {
-          //                 isOn = value;
-          //               });
-          //             }
-          //           },
-          //           activeColor: Theme.of(context).brightness == Brightness.dark
-          //               ? Colors.black
-          //               : Colors.white,
-          //           activeTrackColor:
-          //               Theme.of(context).brightness == Brightness.dark
-          //                   ? Colors.white
-          //                   : Colors.black,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5),
             child: Row(children: [
@@ -292,34 +252,24 @@ class _EventAddPageState extends State<EventAddPage> {
             ]),
           ),
           Divider(),
-          GestureDetector(
-            onTap: _pickColor,
-            child: SizedBox(
-              height: 50,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Icon(
-                      Icons.circle,
-                      color: eventColor,
-                      size: 26,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      // textAlign: TextAlign.left,
-                      colorName,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
+          Container(
+            width: double.infinity,
+            child: ListTile(
+              onTap: _pickColor,
+              leading: Icon(
+                Icons.circle,
+                color: eventColor,
+                size: 26,
+              ),
+              title: Text(
+                colorName,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
           ),
@@ -327,7 +277,7 @@ class _EventAddPageState extends State<EventAddPage> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 17, right: 15),
                 child: Icon(
                   Icons.notes,
                   size: 26,
