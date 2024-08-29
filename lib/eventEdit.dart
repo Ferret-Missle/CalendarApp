@@ -87,11 +87,16 @@ class _EventAddPageState extends State<EventAddPage> {
               child: Text(
                 '保存',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black
+                      : Colors.white,
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                   // shape: RoundedRectangleBorder(
                   //   borderRadius: BorderRadius.circular(5),
                   // ),
@@ -126,42 +131,82 @@ class _EventAddPageState extends State<EventAddPage> {
             ),
           ),
           Divider(),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Icon(
-                    Icons.access_time_rounded,
-                    size: 26,
-                  ),
+          Container(
+            width: double.infinity,
+            child: ListTile(
+              leading: Icon(
+                Icons.access_time_rounded,
+                size: 26,
+              ),
+              title: Text(
+                '終日',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
                 ),
-                Text(
-                  '終日',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-                Spacer(),
-                Padding(
-                  padding: EdgeInsets.only(right: 25),
-                  child: Switch(
-                    value: isOn,
-                    onChanged: (bool? value) {
-                      if (value != null) {
-                        setState(() {
-                          isOn = value;
-                        });
-                      }
-                    },
-                    activeColor: Colors.white,
-                    activeTrackColor: Colors.black,
-                  ),
-                ),
-              ],
+              ),
+              trailing: Switch(
+                value: isOn,
+                onChanged: (bool? value) {
+                  if (value != null) {
+                    setState(() {
+                      isOn = value;
+                    });
+                  }
+                },
+                activeColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
+                activeTrackColor:
+                    Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+              ),
             ),
           ),
+
+          // Padding(
+          //   padding: EdgeInsets.symmetric(vertical: 10),
+          //   child: Row(
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.only(left: 20, right: 20),
+          //         child: Icon(
+          //           Icons.access_time_rounded,
+          //           size: 26,
+          //         ),
+          //       ),
+          //       Text(
+          //         '終日',
+          //         style: TextStyle(
+          //           fontSize: 18,
+          //           fontWeight: FontWeight.w500,
+          //         ),
+          //       ),
+          //       Spacer(),
+          //       Padding(
+          //         padding: EdgeInsets.only(right: 25),
+          //         child: Switch(
+          //           value: isOn,
+          //           onChanged: (bool? value) {
+          //             if (value != null) {
+          //               setState(() {
+          //                 isOn = value;
+          //               });
+          //             }
+          //           },
+          //           activeColor: Theme.of(context).brightness == Brightness.dark
+          //               ? Colors.black
+          //               : Colors.white,
+          //           activeTrackColor:
+          //               Theme.of(context).brightness == Brightness.dark
+          //                   ? Colors.white
+          //                   : Colors.black,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 5),
             child: Row(children: [
@@ -173,7 +218,9 @@ class _EventAddPageState extends State<EventAddPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                   onPressed: () {},
@@ -191,9 +238,11 @@ class _EventAddPageState extends State<EventAddPage> {
                     child: Text(
                       '0:30',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                     onPressed: () {},
@@ -212,7 +261,9 @@ class _EventAddPageState extends State<EventAddPage> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                   onPressed: () {},
@@ -228,9 +279,11 @@ class _EventAddPageState extends State<EventAddPage> {
                     child: Text(
                       '1:30',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                     onPressed: () {},
@@ -260,7 +313,9 @@ class _EventAddPageState extends State<EventAddPage> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                   ),
@@ -283,7 +338,9 @@ class _EventAddPageState extends State<EventAddPage> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
                   ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -291,7 +348,9 @@ class _EventAddPageState extends State<EventAddPage> {
                     hintStyle: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ),
